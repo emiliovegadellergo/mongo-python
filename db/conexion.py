@@ -52,8 +52,11 @@ def conectar(nombre_bd: str = config.DB_NAME) -> Database:
         crear_indices(bd)
         return bd
     except PyMongoError as error:
+        # El detalle técnico queda en __cause__; al usuario solo se le muestra
+        # un mensaje breve.
         raise ErrorConexion(
-            f"No se pudo conectar a MongoDB en {config.MONGO_URI}: {error}"
+            f"No se pudo conectar a MongoDB en {config.MONGO_URI} "
+            f"(tiempo límite: {TIEMPO_ESPERA_MS // 1000} s)."
         ) from error
 
 
