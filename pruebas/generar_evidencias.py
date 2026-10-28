@@ -1,4 +1,4 @@
-"""Genera docs/evidencias.md ejecutando casos de prueba sobre la capa de servicios.
+"""Genera docs/evidencias.md con casos de prueba sobre la capa de servicios.
 
 Usa una base separada (``inventario_pruebas``) que se borra al iniciar y al
 terminar, de modo que nunca toca los datos reales.
@@ -106,9 +106,11 @@ def ejecutar_casos(usuarios: UsuarioServicio,
         return f"Usuario creado con email normalizado '{u.email}'"
 
     ev.exito("Crear usuario",
-             "email='  Ana.Perez@Ejemplo.com ', nombre='Ana', apellido='Pérez'",
+             "email='  Ana.Perez@Ejemplo.com ', nombre='Ana', "
+             "apellido='Pérez'",
              "Usuario guardado con email normalizado",
-             lambda: usuarios.crear("  Ana.Perez@Ejemplo.com ", "Ana", "Pérez"),
+             lambda: usuarios.crear("  Ana.Perez@Ejemplo.com ", "Ana",
+                                    "Pérez"),
              verificar_creado)
 
     def verificar_leido(u: Any) -> str:
@@ -127,7 +129,8 @@ def ejecutar_casos(usuarios: UsuarioServicio,
                 "(apellido conservado)")
 
     ev.exito("Actualizar usuario",
-             "email='ana.perez@ejemplo.com', nombre='Ana María', apellido=None",
+             "email='ana.perez@ejemplo.com', nombre='Ana María', "
+             "apellido=None",
              "Cambia el nombre y conserva el apellido",
              lambda: usuarios.actualizar("ana.perez@ejemplo.com", "Ana María"),
              verificar_actualizado)
@@ -161,7 +164,8 @@ def ejecutar_casos(usuarios: UsuarioServicio,
     def verificar_articulo_actualizado(_: Any) -> str:
         guardado = articulos.obtener(id_articulo)
         assert guardado.nombre == "Laptop" and guardado.marca == "Lenovo"
-        assert fecha_antes is not None and guardado.fecha_modificado > fecha_antes
+        assert fecha_antes is not None
+        assert guardado.fecha_modificado > fecha_antes
         return (f"Guardado: nombre '{guardado.nombre}' conservado, marca "
                 f"'{guardado.marca}', fecha_modificado actualizada")
 
@@ -212,7 +216,8 @@ def ejecutar_casos(usuarios: UsuarioServicio,
         try:
             usuarios.obtener("ana.perez@ejemplo.com")
         except UsuarioNoEncontradoError:
-            return "Eliminado (ya sin artículos); búsqueda posterior no lo encuentra"
+            return ("Eliminado (ya sin artículos); una búsqueda posterior "
+                    "ya no lo encuentra")
         raise AssertionError("El usuario sigue existiendo")
 
     ev.exito("Eliminar usuario", "email='ana.perez@ejemplo.com'",
@@ -244,8 +249,9 @@ def escribir_informe(ev: Evidencias) -> None:
         "se ejecutan antes de los borrados porque necesitan que el usuario y "
         "el artículo existan.",
     ]
-    for tipo, encabezado in (("Éxito", "Casos de éxito (CRUD)"),
-                             ("Fallo controlado", "Casos de fallo controlado")):
+    secciones = (("Éxito", "Casos de éxito (CRUD)"),
+                 ("Fallo controlado", "Casos de fallo controlado"))
+    for tipo, encabezado in secciones:
         lineas += ["", f"## {encabezado}", "",
                    "| # | Operación | Datos de entrada | Esperado | "
                    "Resultado obtenido | ¿Como se esperaba? |",

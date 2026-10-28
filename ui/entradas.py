@@ -33,7 +33,8 @@ def leer_opcion(mensaje: str, minimo: int, maximo: int) -> int:
         valor = input(mensaje).strip()
         if valor.isdigit() and minimo <= int(valor) <= maximo:
             return int(valor)
-        print(f"  Opción inválida: escriba un número entre {minimo} y {maximo}.")
+        print(f"  Opción inválida: escriba un número entre {minimo} y "
+              f"{maximo}.")
 
 
 def confirmar(mensaje: str) -> bool:

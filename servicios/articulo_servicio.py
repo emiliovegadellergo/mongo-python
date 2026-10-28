@@ -20,7 +20,8 @@ def validar_nombre(nombre: str) -> str:
     limpio = nombre.strip()
     if not limpio:
         raise ValidacionError(
-            "El nombre del artículo es obligatorio y no puede ser solo espacios.")
+            "El nombre del artículo es obligatorio y no puede ser solo "
+            "espacios.")
     return limpio
 
 
@@ -29,7 +30,7 @@ class ArticuloServicio:
 
     def __init__(self, articulos: ArticuloRepositorio,
                  usuarios: UsuarioRepositorio) -> None:
-        """Recibe los repositorios; usuarios se usa para validar al responsable."""
+        """Recibe los repositorios (usuarios valida al responsable)."""
         self._articulos = articulos
         self._usuarios = usuarios
 
@@ -51,8 +52,8 @@ class ArticuloServicio:
         id_articulo = id_articulo.strip()
         if not self._articulos.es_id_valido(id_articulo):
             raise ValidacionError(
-                f"'{id_articulo}' no es un ID válido: debe tener 24 caracteres "
-                "hexadecimales.")
+                f"'{id_articulo}' no es un ID válido: debe tener 24 "
+                "caracteres hexadecimales.")
         return id_articulo
 
     def crear(self, nombre: str, descripcion: str, marca: str,
@@ -97,7 +98,8 @@ class ArticuloServicio:
         Siempre registra quién hizo el cambio y cuándo.
 
         Raises:
-            ValidacionError, UsuarioNoEncontradoError, ArticuloNoEncontradoError
+            ValidacionError, UsuarioNoEncontradoError,
+            ArticuloNoEncontradoError
         """
         articulo = self.obtener(id_articulo)
         responsable = self.validar_responsable(email_responsable)
@@ -111,7 +113,8 @@ class ArticuloServicio:
         articulo.fecha_modificado = datetime.now(timezone.utc)
         if not self._articulos.actualizar(articulo):
             raise ArticuloNoEncontradoError(
-                f"El artículo {articulo.id} fue eliminado durante la operación.")
+                f"El artículo {articulo.id} fue eliminado durante la "
+                "operación.")
         return articulo
 
     def eliminar(self, id_articulo: str) -> None:

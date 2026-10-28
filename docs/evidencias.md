@@ -1,6 +1,6 @@
 # Evidencias de pruebas
 
-Generado: 2026-10-27 18:55 por `pruebas/generar_evidencias.py` sobre la base `inventario_pruebas` (se borra al iniciar y al terminar).
+Generado: 2026-10-27 18:57 por `pruebas/generar_evidencias.py` sobre la base `inventario_pruebas` (se borra al iniciar y al terminar).
 
 **Resultado: 14 de 14 casos se comportaron como se esperaba.**
 
@@ -13,11 +13,11 @@ Los casos se numeran en orden de ejecución: los fallos controlados se ejecutan 
 | 1 | Crear usuario | `email='  Ana.Perez@Ejemplo.com ', nombre='Ana', apellido='Pérez'` | Usuario guardado con email normalizado | Usuario creado con email normalizado 'ana.perez@ejemplo.com' | ✅ Sí |
 | 2 | Buscar usuario por email | `email='ana.perez@ejemplo.com'` | Devuelve el usuario creado | Encontrado: Ana Pérez <ana.perez@ejemplo.com> | ✅ Sí |
 | 3 | Actualizar usuario | `email='ana.perez@ejemplo.com', nombre='Ana María', apellido=None` | Cambia el nombre y conserva el apellido | Guardado: Ana María Pérez (apellido conservado) | ✅ Sí |
-| 4 | Crear artículo | `nombre='Laptop', descripcion='14 pulgadas', marca='Dell', usuario='ana.perez@ejemplo.com'` | Artículo guardado con usuario y fecha de modificación | Artículo creado con ID 6ae14814e5498585ae454777, modificó ana.perez@ejemplo.com | ✅ Sí |
-| 5 | Buscar artículo por ID | `id='6ae14814e5498585ae454777'` | Devuelve el artículo creado | Encontrado: Laptop / Dell | ✅ Sí |
-| 6 | Actualizar artículo | `id='6ae14814e5498585ae454777', usuario='ana.perez@ejemplo.com', nombre=None, marca='Lenovo'` | Cambia la marca, conserva el nombre y renueva fecha_modificado | Guardado: nombre 'Laptop' conservado, marca 'Lenovo', fecha_modificado actualizada | ✅ Sí |
-| 13 | Eliminar artículo | `id='6ae14814e5498585ae454777'` | El artículo deja de existir | Eliminado; una búsqueda posterior ya no lo encuentra | ✅ Sí |
-| 14 | Eliminar usuario | `email='ana.perez@ejemplo.com'` | El usuario deja de existir al no tener artículos | Eliminado (ya sin artículos); búsqueda posterior no lo encuentra | ✅ Sí |
+| 4 | Crear artículo | `nombre='Laptop', descripcion='14 pulgadas', marca='Dell', usuario='ana.perez@ejemplo.com'` | Artículo guardado con usuario y fecha de modificación | Artículo creado con ID 6ae14891f1424bd03f489ba6, modificó ana.perez@ejemplo.com | ✅ Sí |
+| 5 | Buscar artículo por ID | `id='6ae14891f1424bd03f489ba6'` | Devuelve el artículo creado | Encontrado: Laptop / Dell | ✅ Sí |
+| 6 | Actualizar artículo | `id='6ae14891f1424bd03f489ba6', usuario='ana.perez@ejemplo.com', nombre=None, marca='Lenovo'` | Cambia la marca, conserva el nombre y renueva fecha_modificado | Guardado: nombre 'Laptop' conservado, marca 'Lenovo', fecha_modificado actualizada | ✅ Sí |
+| 13 | Eliminar artículo | `id='6ae14891f1424bd03f489ba6'` | El artículo deja de existir | Eliminado; una búsqueda posterior ya no lo encuentra | ✅ Sí |
+| 14 | Eliminar usuario | `email='ana.perez@ejemplo.com'` | El usuario deja de existir al no tener artículos | Eliminado (ya sin artículos); una búsqueda posterior ya no lo encuentra | ✅ Sí |
 
 ## Casos de fallo controlado
 

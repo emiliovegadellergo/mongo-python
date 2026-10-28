@@ -32,11 +32,12 @@ class ArticuloRepositorio:
     def buscar_por_id(self, id_articulo: str) -> Optional[Articulo]:
         """Devuelve el artículo o ``None``; el id debe ser válido."""
         with traducir_errores():
-            documento = self._coleccion.find_one({"_id": ObjectId(id_articulo)})
+            documento = self._coleccion.find_one(
+                {"_id": ObjectId(id_articulo)})
         return Articulo.from_dict(documento) if documento else None
 
     def listar_todos(self) -> List[Articulo]:
-        """Devuelve los artículos, primero los modificados más recientemente."""
+        """Devuelve los artículos ordenados por modificación más reciente."""
         with traducir_errores():
             documentos = list(
                 self._coleccion.find().sort("fecha_modificado", DESCENDING))

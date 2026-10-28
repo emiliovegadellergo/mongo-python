@@ -22,7 +22,7 @@ class Articulo:
     id: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convierte el artículo en un documento listo para guardar (sin _id)."""
+        """Convierte el artículo en un documento para guardar (sin _id)."""
         return {
             "nombre": self.nombre,
             "descripcion": self.descripcion,

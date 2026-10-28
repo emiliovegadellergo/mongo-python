@@ -21,7 +21,7 @@ class Usuario:
     id: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convierte el usuario en un documento listo para guardar (sin _id)."""
+        """Convierte el usuario en un documento para guardar (sin _id)."""
         return {
             "email": self.email,
             "nombre": self.nombre,

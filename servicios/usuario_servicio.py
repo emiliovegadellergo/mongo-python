@@ -53,7 +53,8 @@ class UsuarioServicio:
         email = validar_email(email)
         # Primera barrera: mensaje claro antes de intentar insertar.
         if self._usuarios.existe(email):
-            raise EmailDuplicadoError(f"Ya existe un usuario con el email {email}.")
+            raise EmailDuplicadoError(
+                f"Ya existe un usuario con el email {email}.")
         usuario = Usuario(email=email, nombre=nombre.strip(),
                           apellido=apellido.strip())
         try:
@@ -74,7 +75,8 @@ class UsuarioServicio:
         email = validar_email(email)
         usuario = self._usuarios.buscar_por_email(email)
         if usuario is None:
-            raise UsuarioNoEncontradoError(f"No existe un usuario con el email {email}.")
+            raise UsuarioNoEncontradoError(
+                f"No existe un usuario con el email {email}.")
         return usuario
 
     def listar(self) -> List[Usuario]:
@@ -99,7 +101,8 @@ class UsuarioServicio:
         if not self._usuarios.actualizar(usuario.email, usuario.nombre,
                                          usuario.apellido):
             raise UsuarioNoEncontradoError(
-                f"El usuario {usuario.email} fue eliminado durante la operación.")
+                f"El usuario {usuario.email} fue eliminado durante la "
+                "operación.")
         return usuario
 
     def eliminar(self, email: str) -> None:
@@ -114,8 +117,8 @@ class UsuarioServicio:
         if referencias > 0:
             raise IntegridadReferencialError(
                 f"No se puede eliminar a {usuario.email}: es el último "
-                f"modificador de {referencias} artículo(s). Reasigne o elimine "
-                "esos artículos primero.",
+                f"modificador de {referencias} artículo(s). Reasigne o "
+                "elimine esos artículos primero.",
                 referencias,
             )
         if not self._usuarios.eliminar(usuario.email):
