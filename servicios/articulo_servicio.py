@@ -33,7 +33,7 @@ class ArticuloServicio:
         self._articulos = articulos
         self._usuarios = usuarios
 
-    def _validar_responsable(self, email: str) -> str:
+    def validar_responsable(self, email: str) -> str:
         """Comprueba que el usuario responsable exista; devuelve su email.
 
         Mongo no tiene llaves foráneas, así que esta verificación sustituye a
@@ -66,7 +66,7 @@ class ArticuloServicio:
             nombre=validar_nombre(nombre),
             descripcion=descripcion.strip(),
             marca=marca.strip(),
-            usuario_modifico=self._validar_responsable(email_responsable),
+            usuario_modifico=self.validar_responsable(email_responsable),
         )
         return self._articulos.insertar(articulo)
 
@@ -100,7 +100,7 @@ class ArticuloServicio:
             ValidacionError, UsuarioNoEncontradoError, ArticuloNoEncontradoError
         """
         articulo = self.obtener(id_articulo)
-        responsable = self._validar_responsable(email_responsable)
+        responsable = self.validar_responsable(email_responsable)
         if nombre is not None:
             articulo.nombre = validar_nombre(nombre)
         if descripcion is not None:
